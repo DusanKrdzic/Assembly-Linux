@@ -1,0 +1,45 @@
+.intel_syntax noprefix
+.arch i386
+
+.data
+unos_text:
+.asciz "Unesi broj:\n"
+
+unos:
+.asciz " %d"
+
+izlaz:
+
+.asciz "Broj je:%d\n"
+
+.text
+
+.extern scanf
+.extern printf
+.extern exit
+.global _start
+
+_start:
+
+push offset unos_text
+call printf
+add esp,4
+
+
+push esp
+push offset unos
+call scanf
+
+
+
+mov eax, esp
+add eax,8
+push [eax]
+push offset izlaz
+call printf
+
+
+
+call exit
+
+.end
